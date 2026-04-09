@@ -1,0 +1,90 @@
+.medicines-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.medicines-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.medicines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.med-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.med-title {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.med-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.med-info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.med-info-row.dates {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    background: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    margin-top: 0.5rem;
+}
+
+.bullet {
+    color: var(--primary-light);
+    font-weight: bold;
+}
+
+.med-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    flex: 1;
+}
+
+/* Medicines Responsiveness */
+@media (max-width: 600px) {
+    .medicines-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .med-card {
+        padding: 1.25rem;
+    }
+
+    .med-title {
+        font-size: 1.15rem;
+    }
+
+    .med-actions {
+        flex-direction: column;
+    }
+}
