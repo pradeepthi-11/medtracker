@@ -9,41 +9,52 @@ const trackingRoutes = require('./routes/trackingRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 5005;
+
+// Use Render dynamic PORT
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Main Initialization
+// Start Server Function
 const startServer = async () => {
     try {
+        // Initialize MongoDB
         await initDb();
 
-        // Root Health Check
+        // Health Check Route
         app.get('/', (req, res) => {
-            res.json({ success: true, message: 'MediTrack API is running...' });
+            res.json({
+                success: true,
+                message: 'MediTrack API is running...'
+            });
         });
 
-        // Routes
+        // API Routes
         app.use('/api/auth', authRoutes);
         app.use('/api/medicines', medicineRoutes);
         app.use('/api/tracking', trackingRoutes);
 
-        // Error Handling
+        // Error Handling Middleware
         app.use((err, req, res, next) => {
             console.error(err.stack);
-            res.status(500).send({ success: false, message: 'Internal Server Error' });
+            res.status(500).json({
+                success: false,
+                message: 'Internal Server Error'
+            });
         });
 
+        // Start Server
         app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
-            setInterval(() => {}, 100000); // keep alive
+            console.log(`Server running on port ${PORT}`);
         });
+
     } catch (error) {
         console.error('Failed to start server:', error);
         process.exit(1);
     }
 };
 
+// Run Server
 startServer();
